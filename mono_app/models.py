@@ -29,6 +29,7 @@ class Ingredient(models.Model):
 class Cook(AbstractUser):
     years_of_experience = models.PositiveIntegerField(default=0)
     bio = models.TextField(blank=True, null=True)
+    specialization = models.CharField(max_length=100, blank=True, null=True)
     profile_picture = models.ImageField(upload_to='cook_pics/', null=True, blank=True)
 
     class Meta:
