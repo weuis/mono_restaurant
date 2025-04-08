@@ -47,8 +47,7 @@ class Dish(models.Model):
     cooks = models.ManyToManyField(Cook, related_name="dishes")
     ingredients = models.ManyToManyField(Ingredient, related_name="dishes")
     is_vegetarian = models.BooleanField(default=False)
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
+
 
     class Meta:
         verbose_name = "Dish"
