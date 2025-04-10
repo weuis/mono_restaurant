@@ -12,7 +12,7 @@
 <section class="mb-5">
     <h2>Featured Dishes</h2>
     <div class="row">
-        {% for dish in dishes %}
+        {% for dish in latest_dishes %}
             <div class="col-md-4">
                 <div class="card mb-4 shadow-sm h-100">
                     <div class="card-body d-flex flex-column">
@@ -20,7 +20,11 @@
                         <p class="card-text">{{ dish.description|truncatewords:15 }}</p>
                         <p><strong>Type:</strong> {{ dish.dish_type.name }}</p>
                         <p><strong>Price:</strong> ${{ dish.price }}</p>
-                        <p><strong>Cooks:</strong> {{ dish.cooks.all|join:", " }}</p>
+                        <p><strong>Cooks:</strong>
+                            {% for cook in dish.cooks.all %}
+                                {{ cook.username }}{% if not forloop.last %}, {% endif %}
+                            {% endfor %}
+                        </p>
                     </div>
                 </div>
             </div>
@@ -46,7 +50,7 @@
 <section>
     <h2>Our Cooks</h2>
     <div class="row">
-        {% for cook in cooks %}
+        {% for cook in top_cooks %}
             <div class="col-md-3 mb-4">
                 <div class="card text-center h-100 shadow-sm">
                     {% if cook.profile_picture %}
