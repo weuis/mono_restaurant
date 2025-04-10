@@ -1,0 +1,64 @@
+<!-- templates/index.html -->
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home | Restaurant Kitchen</title>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+</head>
+<body>
+<div class="container mt-5">
+    <h1 class="text-center mb-4">Welcome to Our Kitchen Control System</h1>
+
+    <section class="mb-5">
+        <h2>Featured Dishes</h2>
+        <div class="row">
+            {% for dish in dishes %}
+                <div class="col-md-4">
+                    <div class="card mb-3 shadow-sm">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ dish.name }}</h5>
+                            <p class="card-text">{{ dish.description|truncatewords:15 }}</p>
+                            <p><strong>Type:</strong> {{ dish.dish_type.name }}</p>
+                            <p><strong>Price:</strong> ${{ dish.price }}</p>
+                            <p><strong>Cooks:</strong> {{ dish.cooks.all|join:", " }}</p>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </section>
+
+    <section class="mb-5">
+        <h2>Dish Types</h2>
+        <ul class="list-group list-group-horizontal">
+            {% for type in dish_types %}
+                <li class="list-group-item flex-fill text-center">{{ type.name }}</li>
+            {% endfor %}
+        </ul>
+    </section>
+
+    <section>
+        <h2>Our Cooks</h2>
+        <div class="row">
+            {% for cook in cooks %}
+                <div class="col-md-3">
+                    <div class="card text-center shadow-sm">
+                        {% if cook.profile_picture %}
+                            <img src="{{ cook.profile_picture.url }}" class="card-img-top" alt="{{ cook.username }}">
+                        {% else %}
+                            <img src="{% static 'img/default_cook.jpg' %}" class="card-img-top" alt="Cook">
+                        {% endif %}
+                        <div class="card-body">
+                            <h5 class="card-title">{{ cook.first_name }} {{ cook.last_name }}</h5>
+                            <p class="card-text"><strong>Experience:</strong> {{ cook.years_of_experience }} yrs</p>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </section>
+</div>
+</body>
+</html>
