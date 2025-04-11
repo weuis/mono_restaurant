@@ -110,3 +110,19 @@ h1, h2, h3, h4 {
 .mb-5 {
     margin-bottom: 3rem !important;
 }
+
+.btn-main {
+    background-color: var(--primary-color);
+    color: #fff;
+    font-weight: 600;
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: var(--radius);
+    transition: background-color 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.btn-main:hover {
+    background-color: var(--accent-color);
+    color: #000;
+}

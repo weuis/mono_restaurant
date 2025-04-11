@@ -1,7 +1,8 @@
 {% extends 'base.html' %}
+{% load bootstrap4 %}
 {% load crispy_forms_filters %}
 
-{% block title %}Login - - Mono Restaurant Kitchen Manager{% endblock %}
+{% block title %}Login - Mono Restaurant Kitchen Manager{% endblock %}
 
 {% block content %}
   <div class="container py-5 d-flex justify-content-center align-items-center" style="min-height: 80vh;">
@@ -9,14 +10,20 @@
       <div class="card shadow-lg border-0 rounded-lg">
         <div class="card-body p-4">
           <h2 class="text-center mb-4 text-primary font-weight-bold">Welcome Back</h2>
+          {% if messages %}
+                {% for message in messages %}
+                    <div class="alert alert-success">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
           <p class="text-center text-muted">Sign in to continue</p>
           <form method="post" class="mt-3" novalidate>
-            {% csrf_token %}
-            {{ form|crispy }}
-            <button type="submit" class="btn btn-primary btn-block rounded-pill shadow-sm">Login</button>
+              {% csrf_token %}
+              {% bootstrap_form form %}
+            <button type="submit" class="btn btn-main btn-block">Login</button>
           </form>
         </div>
       </div>
     </div>
   </div>
+
 {% endblock %}

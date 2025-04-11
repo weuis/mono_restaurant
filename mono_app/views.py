@@ -1,8 +1,6 @@
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render
-from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import LoginView, LogoutView
-from django.core.exceptions import PermissionDenied
 from django.urls import reverse_lazy
 from django.contrib import messages
 
@@ -37,8 +35,8 @@ class CustomLoginView(LoginView):
 
 class CustomLogoutView(LogoutView):
     template_name = 'registration/logout.html'
-    success_url = reverse_lazy('mono_app:index')
 
     def dispatch(self, request, *args, **kwargs):
-        messages.success(request, "You have been logged out successfully. Come back soon!.")
+        messages.success(request, "You have been logged out successfully. Come back soon!")
         return super().dispatch(request, *args, **kwargs)
+
