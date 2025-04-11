@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}Logged Out - Mono Restaurant Kitchen Manager{% endblock %}
+
+{% block content %}
+  <div class="container py-5 d-flex justify-content-center align-items-center" style="min-height: 80vh;">
+    <div class="col-md-4">
+      <div class="card shadow-lg border-0 rounded-lg">
+        <div class="card-body p-4 text-center">
+          <h2 class="text-primary font-weight-bold">You have been logged out</h2>
+          <p class="text-muted">Come back soon!</p>
+          <a href="{% url 'mono_app:login' %}" class="btn btn-primary btn-block rounded-pill shadow-sm">Log in again</a>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

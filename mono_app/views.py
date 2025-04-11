@@ -1,5 +1,10 @@
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.views import LoginView, LogoutView
+from django.core.exceptions import PermissionDenied
+from django.urls import reverse_lazy
+from django.contrib import messages
 
 from mono_app.models import Dish, Cook, DishType
 
@@ -21,3 +26,19 @@ def index(request: HttpRequest) -> HttpResponse:
             "top_cooks": top_cooks,
         }
     )
+
+
+class CustomLoginView(LoginView):
+    template_name = 'registration/login.html'
+    redirect_authenticated_user = True
+
+    def get_success_url(self):
+        return reverse_lazy('mono_app:index')
+
+class CustomLogoutView(LogoutView):
+    template_name = 'registration/logout.html'
+    success_url = reverse_lazy('mono_app:index')
+
+    def dispatch(self, request, *args, **kwargs):
+        messages.success(request, "You have been logged out successfully. Come back soon!.")
+        return super().dispatch(request, *args, **kwargs)

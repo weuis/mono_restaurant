@@ -14,13 +14,14 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-
-from django.urls import path, include
-
 from django.contrib import admin
+from django.urls import path, include
+from mono_app.views import CustomLoginView, CustomLogoutView
 
 app_name = "mono_app"
 urlpatterns = [
-    path("admin/", admin.site.urls),
-    path("", include("mono_app.urls", namespace="mono_app")),
+    path('admin/', admin.site.urls),
+    path('', include('mono_app.urls', namespace='mono_app')),
+    path('login/', CustomLoginView.as_view(), name='login'),
+    path('logout/', CustomLogoutView.as_view(), name='logout'),
 ]
