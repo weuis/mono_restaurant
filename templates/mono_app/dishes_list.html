@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1 class="text-3xl font-bold mb-4">Dishes</h1>
+
+<form method="get" class="flex gap-4 mb-6">
+  <label>
+    <input type="text" name="q" value="{{ search_query }}" placeholder="Search..." class="border p-2 rounded">
+  </label>
+
+  <label>
+    <select name="type" class="border p-2 rounded">
+      <option value="">All Types</option>
+      {% for type in dish_types %}
+        <option value="{{ type.name }}" {% if type.name == selected_type %}selected{% endif %}>{{ type.name }}</option>
+      {% endfor %}
+    </select>
+  </label>
+
+  <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Filter</button>
+</form>
+
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+  {% for dish in dishes %}
+    <div class="p-4 border rounded-xl shadow hover:shadow-lg transition">
+      <h2 class="text-xl font-semibold">{{ dish.name }}</h2>
+      <p>{{ dish.description|truncatechars:100 }}</p>
+      <p><strong>Type:</strong> {{ dish.dish_type }}</p>
+      <p><strong>Price:</strong> ${{ dish.price }}</p>
+    </div>
+  {% endfor %}
+</div>
+
+<div class="mt-6">
+  {% if is_paginated %}
+    <div class="flex gap-2">
+      {% if page_obj.has_previous %}
+        <a href="?{% if selected_type %}type={{ selected_type }}&{% endif %}{% if search_query %}q={{ search_query }}&{% endif %}page={{ page_obj.previous_page_number }}" class="px-3 py-1 border rounded">Previous</a>
+      {% endif %}
+
+      <span class="px-3 py-1 border rounded bg-gray-200">Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</span>
+
+      {% if page_obj.has_next %}
+        <a href="?{% if selected_type %}type={{ selected_type }}&{% endif %}{% if search_query %}q={{ search_query }}&{% endif %}page={{ page_obj.next_page_number }}" class="px-3 py-1 border rounded">Next</a>
+      {% endif %}
+    </div>
+  {% endif %}
+</div>
+{% endblock %}
