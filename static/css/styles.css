@@ -7,20 +7,18 @@
     --padding: 1rem;
 }
 
-/* Reset */
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
 
-/* Body & Global */
 body {
     font-family: 'Segoe UI', sans-serif;
     background-color: var(--bg-color);
     color: var(--text-color);
     line-height: 1.6;
-    padding-top: 70px; /* Offset for fixed navbar */
+    padding-top: 70px;
 }
 
 a {
@@ -39,7 +37,6 @@ main.container {
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.05);
 }
 
-/* Navbar */
 .navbar {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
@@ -59,7 +56,6 @@ main.container {
     color: var(--accent-color);
 }
 
-/* Cards */
 .card {
     border-radius: var(--radius);
 }
@@ -69,7 +65,6 @@ main.container {
     height: 200px;
 }
 
-/* Footer */
 footer {
     background-color: #f8f9fa;
     color: #666;
@@ -85,7 +80,6 @@ footer a:hover {
     color: var(--accent-color);
 }
 
-/* Headings */
 h1, h2, h3, h4 {
     color: var(--primary-color);
 }
@@ -94,7 +88,7 @@ h1, h2, h3, h4 {
     color: #666;
 }
 
-/* Utility */
+
 .text-center {
     text-align: center;
 }
@@ -126,3 +120,6 @@ h1, h2, h3, h4 {
     background-color: var(--accent-color);
     color: #000;
 }
+
+
+

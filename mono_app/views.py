@@ -54,6 +54,25 @@ class DishListView(generic.ListView):
         return context
 
 
+class CooksListView(generic.ListView):
+    model = Cook
+    template_name = 'mono_app/cooks.html'
+    context_object_name = 'cooks'
+    paginate_by = 6
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        search_query = self.request.GET.get('q')
+        if search_query:
+            queryset = queryset.filter(
+                username__icontains=search_query
+            ) | queryset.filter(
+                first_name__icontains=search_query
+            ) | queryset.filter(
+                last_name__icontains=search_query
+            )
+        return queryset.order_by('-years_of_experience')
+
 class CustomLoginView(LoginView):
     template_name = 'registration/login.html'
     redirect_authenticated_user = True
