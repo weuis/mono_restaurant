@@ -94,6 +94,25 @@ class DishTypeListView(generic.ListView):
         return context
 
 
+class IngredientListView(generic.ListView):
+    model = Ingredient
+    template_name = 'mono_app/ingredient_list.html'
+    context_object_name = 'ingredients'
+    paginate_by = 6
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        q = self.request.GET.get("q")
+        if q:
+            queryset = queryset.filter(Q(name__icontains=q) | Q(unit__icontains=q))
+        return queryset
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["q"] = self.request.GET.get("q", "")
+        return context
+
+
 class CustomLoginView(LoginView):
     template_name = 'registration/login.html'
     redirect_authenticated_user = True
