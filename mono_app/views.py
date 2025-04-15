@@ -4,8 +4,9 @@ from django.contrib.auth.views import LoginView, LogoutView
 from django.urls import reverse_lazy
 from django.contrib import messages
 from django.views import generic
+from django.db.models import Q
 
-from mono_app.models import Dish, Cook, DishType
+from mono_app.models import Dish, Cook, DishType, Ingredient
 
 
 def index(request: HttpRequest) -> HttpResponse:
@@ -72,6 +73,26 @@ class CooksListView(generic.ListView):
                 last_name__icontains=search_query
             )
         return queryset.order_by('-years_of_experience')
+
+
+class DishTypeListView(generic.ListView):
+    model = DishType
+    template_name = 'mono_app/dish_type_list.html'
+    context_object_name = 'dish_types'
+    paginate_by = 6
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        q = self.request.GET.get('q')
+        if q:
+            queryset = queryset.filter(Q(name__icontains=q))
+        return queryset
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["q"] = self.request.GET.get("q", "")
+        return context
+
 
 class CustomLoginView(LoginView):
     template_name = 'registration/login.html'
