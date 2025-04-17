@@ -79,6 +79,18 @@ class DishUpdateView(generic.UpdateView):
         return reverse_lazy('mono_app:dish-detail', kwargs={'pk': self.object.pk})
 
 
+class DishCreateView(generic.CreateView):
+    model = Dish
+    fields = ['name', 'description', 'dish_type', 'cooks', 'image']
+    template_name = 'mono_app/dish_create.html'
+
+    def form_valid(self, form):
+        messages.success(self.request, "Dish created successfully!")
+        return super().form_valid(form)
+
+    def get_success_url(self):
+        return reverse_lazy('mono_app:dish-list')
+
 class DishDeleteView(generic.DeleteView):
     model = Dish
     template_name = 'mono_app/dish_confirm_delete.html'

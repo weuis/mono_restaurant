@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="card shadow-lg p-4 rounded-4">
+        <h2 class="mb-4">Create New Dish</h2>
+
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="mb-3">
+                {{ form.name.label }} <br>
+                {{ form.name }}
+            </div>
+
+            <div class="mb-3">
+                {{ form.description.label }} <br>
+                {{ form.description }}
+            </div>
+
+            <div class="mb-3">
+                {{ form.dish_type.label }} <br>
+                {{ form.dish_type }}
+            </div>
+
+            <div class="mb-3">
+                {{ form.cooks.label }} <br>
+                {{ form.cooks }}
+            </div>
+
+            <div class="mb-3">
+                {{ form.image.label }} <br>
+                {{ form.image }}
+            </div>
+
+            <div class="mt-4">
+                <button type="submit" class="btn btn-success">Create Dish</button>
+                <a href="{% url 'mono_app:dish-list' %}" class="btn btn-outline-secondary ms-2">Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
