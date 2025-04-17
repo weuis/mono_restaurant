@@ -20,7 +20,7 @@
         {% if cook.profile_picture %}
           <img src="{{ cook.profile_picture.url }}" class="card-img-top" alt="{{ cook.username }}">
         {% else %}
-          <img src="{% static 'images/default_profile.png' %}" class="card-img-top" alt="No image">
+          <img src="{% static 'images/default_profile.jpg' %}" class="card-img-top" alt="No image">
         {% endif %}
         <div class="card-body">
           <h5 class="card-title">{{ cook.first_name }} {{ cook.last_name }}</h5>
