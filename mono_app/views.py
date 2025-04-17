@@ -5,6 +5,7 @@ from django.urls import reverse_lazy
 from django.contrib import messages
 from django.views import generic
 from django.db.models import Q
+from django.shortcuts import get_object_or_404
 
 from mono_app.models import Dish, Cook, DishType, Ingredient
 
@@ -30,7 +31,7 @@ def index(request: HttpRequest) -> HttpResponse:
 
 class DishListView(generic.ListView):
     model = Dish
-    template_name = 'mono_app/dishes_list.html'
+    template_name = 'mono_app/dish/dishes_list.html'
     context_object_name = 'dishes'
     paginate_by = 4
 
@@ -57,7 +58,7 @@ class DishListView(generic.ListView):
 
 class DishDetailView(generic.DetailView):
     model = Dish
-    template_name = 'mono_app/dish_detail.html'
+    template_name = 'mono_app/dish/dish_detail.html'
     context_object_name = 'dish'
 
     def get_context_data(self, **kwargs):
@@ -69,7 +70,7 @@ class DishDetailView(generic.DetailView):
 class DishUpdateView(generic.UpdateView):
     model = Dish
     fields = ['name', 'description', 'dish_type', 'cooks']
-    template_name = 'mono_app/dish_update.html'
+    template_name = 'mono_app/dish/dish_update.html'
 
     def form_valid(self, form):
         messages.success(self.request, "Dish updated successfully.")
@@ -82,7 +83,7 @@ class DishUpdateView(generic.UpdateView):
 class DishCreateView(generic.CreateView):
     model = Dish
     fields = ['name', 'description', 'dish_type', 'cooks', 'image']
-    template_name = 'mono_app/dish_create.html'
+    template_name = 'mono_app/dish/dish_create.html'
 
     def form_valid(self, form):
         messages.success(self.request, "Dish created successfully!")
@@ -94,13 +95,13 @@ class DishCreateView(generic.CreateView):
 
 class DishDeleteView(generic.DeleteView):
     model = Dish
-    template_name = 'mono_app/dish_confirm_delete.html'
+    template_name = 'mono_app/dish/dish_confirm_delete.html'
     success_url = reverse_lazy('mono_app:dish-list')
 
 
 class CooksListView(generic.ListView):
     model = Cook
-    template_name = 'mono_app/cooks.html'
+    template_name = 'mono_app/cooks/cooks.html'
     context_object_name = 'cooks'
     paginate_by = 6
 
@@ -120,7 +121,7 @@ class CooksListView(generic.ListView):
 
 class CookDetailView(generic.DetailView):
     model = Cook
-    template_name = 'mono_app/cook_detail.html'
+    template_name = 'mono_app/cooks/cook_detail.html'
     context_object_name = 'cook'
 
 
@@ -131,7 +132,7 @@ class CookCreateView(generic.CreateView):
         'years_of_experience', 'bio',
         'specialization', 'profile_picture'
     ]
-    template_name = 'mono_app/cooks_create.html'
+    template_name = 'mono_app/cooks/cooks_create.html'
     success_url = reverse_lazy('cooks-list')
 
     def form_valid(self, form):
@@ -150,9 +151,39 @@ class CookCreateView(generic.CreateView):
         return super().form_invalid(form)
 
 
+class CookUpdateView(generic.UpdateView):
+    model = Cook
+    fields = ['years_of_experience', 'bio', 'specialization', 'profile_picture']
+    template_name = 'mono_app/cooks/cook_update.html'
+
+    def get_object(self, queryset=None):
+        return get_object_or_404(Cook, id=self.kwargs['id'])
+
+    def form_valid(self, form):
+        messages.success(self.request, "Cook updated successfully!")
+        return super().form_valid(form)
+
+    def get_success_url(self):
+        return reverse_lazy('mono_app:cooks')
+
+
+class CookDeleteView(generic.DeleteView):
+    model = Cook
+    template_name = 'mono_app/cooks/cook_confirm_delete.html'
+    context_object_name = 'cook'
+    success_url = reverse_lazy('mono_app:cooks')
+
+    def get_object(self, queryset=None):
+        return get_object_or_404(Cook, id=self.kwargs['id'])
+
+    def delete(self, request, *args, **kwargs):
+        messages.success(self.request, "Cook has been deleted successfully!")
+        return super().delete(request, *args, **kwargs)
+
+
 class DishTypeListView(generic.ListView):
     model = DishType
-    template_name = 'mono_app/dish_type_list.html'
+    template_name = 'mono_app/dish_type/dish_type_list.html'
     context_object_name = 'dish_types'
     paginate_by = 6
 
@@ -171,7 +202,7 @@ class DishTypeListView(generic.ListView):
 
 class IngredientListView(generic.ListView):
     model = Ingredient
-    template_name = 'mono_app/ingredient_list.html'
+    template_name = 'mono_app/ingredients/ingredient_list.html'
     context_object_name = 'ingredients'
     paginate_by = 6
 

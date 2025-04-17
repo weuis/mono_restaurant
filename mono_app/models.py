@@ -30,7 +30,7 @@ class Cook(AbstractUser):
     years_of_experience = models.PositiveIntegerField(default=0)
     bio = models.TextField(blank=True, null=True)
     specialization = models.CharField(max_length=100, blank=True, null=True)
-    profile_picture = models.ImageField(upload_to='images/', null=True, blank=True)
+    profile_picture = models.ImageField(upload_to='media/', null=True, blank=True)
 
     class Meta:
         verbose_name = "Cook"
@@ -48,7 +48,7 @@ class Dish(models.Model):
     cooks = models.ManyToManyField(Cook, related_name="dishes")
     ingredients = models.ManyToManyField(Ingredient, related_name="dishes")
     is_vegetarian = models.BooleanField(default=False)
-    image = models.ImageField(upload_to='images/', blank=True, null=True)
+    image = models.ImageField(upload_to='static/media/', blank=True, null=True)
 
 
     class Meta:

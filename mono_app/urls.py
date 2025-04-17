@@ -9,6 +9,8 @@ from mono_app.views import (
     CooksListView,
     CookDetailView,
     CookCreateView,
+    CookUpdateView,
+    CookDeleteView,
     DishTypeListView,
     IngredientListView,
 )
@@ -24,6 +26,8 @@ urlpatterns = [
     path('cooks/', CooksListView.as_view(), name='cooks'),
     path('cooks/<int:pk>/', CookDetailView.as_view(), name='cook-detail'),
     path('cooks/create/', CookCreateView.as_view(), name='cook-create'),
+    path('cooks/<int:id>/update/', CookUpdateView.as_view(), name='cook-update'),
+    path('cooks/<int:id>/delete/', CookDeleteView.as_view(), name='cook-delete'),
     path('dishtypes/', DishTypeListView.as_view(),name='dish-types'),
 path("ingredients/", IngredientListView.as_view(), name="ingredient-list"),
 ]
