@@ -117,6 +117,12 @@ class CooksListView(generic.ListView):
         return queryset.order_by('-years_of_experience')
 
 
+class CookDetailView(generic.DetailView):
+    model = Cook
+    template_name = 'mono_app/cook_detail.html'
+    context_object_name = 'cook'
+
+
 class DishTypeListView(generic.ListView):
     model = DishType
     template_name = 'mono_app/dish_type_list.html'

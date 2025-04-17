@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="max-w-3xl mx-auto mt-10 bg-white rounded-2xl shadow-lg p-6">
+    <div class="flex flex-col items-center text-center">
+        {% if cook.profile_picture %}
+            <img src="{{ cook.profile_picture.url }}" class="w-32 h-32 rounded-full object-cover mb-4 shadow" alt="{{ cook.username }}">
+        {% else %}
+            <img src="{% static 'media/default_profile.jpg' %}" class="w-32 h-32 rounded-full object-cover mb-4 shadow" alt="Default profile">
+        {% endif %}
+
+        <h2 class="text-2xl font-bold">{{ cook.first_name }} {{ cook.last_name }}</h2>
+        <p class="text-gray-600">@{{ cook.username }}</p>
+
+        <div class="mt-4 space-y-1 text-sm text-gray-700">
+            <p><strong>Years of experience:</strong> {{ cook.years_of_experience }}</p>
+            {% if cook.specialization %}
+                <p><strong>Specialization:</strong> {{ cook.specialization }}</p>
+            {% endif %}
+            {% if cook.bio %}
+                <p class="italic pt-2">{{ cook.bio }}</p>
+            {% endif %}
+        </div>
+
+        <a href="{% url 'mono_app:cooks' %}" class="mt-6 inline-block bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition">← Back to all cooks</a>
+    </div>
+</div>
+{% endblock %}
