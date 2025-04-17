@@ -55,6 +55,17 @@ class DishListView(generic.ListView):
         return context
 
 
+class DishDetailView(generic.DetailView):
+    model = Dish
+    template_name = 'mono_app/dish_detail.html'
+    context_object_name = 'dish'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['chefs'] = self.object.cooks.all()
+        return context
+
+
 class CooksListView(generic.ListView):
     model = Cook
     template_name = 'mono_app/cooks.html'

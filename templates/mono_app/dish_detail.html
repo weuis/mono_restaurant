@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<div class="container mt-5">
+    <div class="card shadow-lg p-4 rounded-4">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h2 class="mb-0">{{ dish.name }}</h2>
+        </div>
+
+        <p><strong>Dish Type:</strong> {{ dish.dish_type.name }}</p>
+
+        {% if dish.image %}
+            <img src="{{ dish.image.url }}" alt="{{ dish.name }}" class="img-fluid rounded mb-3" style="max-height: 300px;">
+        {% else %}
+            <img src="{% static 'images/default-dish.jpg' %}" alt="Default Dish" class="img-fluid rounded mb-3" style="max-height: 300px;">
+        {% endif %}
+
+        <p class="lead">{{ dish.description }}</p>
+
+        <h5>Assigned Chefs:</h5>
+        {% if chefs %}
+            <div class="d-flex flex-wrap gap-2">
+                {% for chef in chefs %}
+                    <span class>{{ chef.first_name }} {{ chef.last_name }}</span>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p class="text-muted">No chefs assigned to this dish.</p>
+        {% endif %}
+
+        <hr class="my-4">
+
+        <a href="{% url 'mono_app:dish-list' %}" class="btn btn-outline-secondary">← Back to Dish List</a>
+    </div>
+</div>
+{% endblock %}
