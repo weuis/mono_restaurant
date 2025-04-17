@@ -48,6 +48,7 @@ class Dish(models.Model):
     cooks = models.ManyToManyField(Cook, related_name="dishes")
     ingredients = models.ManyToManyField(Ingredient, related_name="dishes")
     is_vegetarian = models.BooleanField(default=False)
+    image = models.ImageField(upload_to='images/', blank=True, null=True)
 
 
     class Meta:
