@@ -91,6 +91,7 @@ class DishCreateView(generic.CreateView):
     def get_success_url(self):
         return reverse_lazy('mono_app:dish-list')
 
+
 class DishDeleteView(generic.DeleteView):
     model = Dish
     template_name = 'mono_app/dish_confirm_delete.html'
@@ -121,6 +122,32 @@ class CookDetailView(generic.DetailView):
     model = Cook
     template_name = 'mono_app/cook_detail.html'
     context_object_name = 'cook'
+
+
+class CookCreateView(generic.CreateView):
+    model = Cook
+    fields = [
+        'username', 'first_name', 'last_name',
+        'years_of_experience', 'bio',
+        'specialization', 'profile_picture'
+    ]
+    template_name = 'mono_app/cooks_create.html'
+    success_url = reverse_lazy('cooks-list')
+
+    def form_valid(self, form):
+        if not form.cleaned_data.get("specialization"):
+            form.add_error("specialization", "Specialization is required.")
+            return self.form_invalid(form)
+        if not form.cleaned_data.get("profile_picture"):
+            form.add_error("profile_picture", "Please upload a profile picture.")
+            return self.form_invalid(form)
+
+        messages.success(self.request, "Cook created successfully!")
+        return super().form_valid(form)
+
+    def form_invalid(self, form):
+        messages.error(self.request, "Please fix the errors below.")
+        return super().form_invalid(form)
 
 
 class DishTypeListView(generic.ListView):
@@ -167,6 +194,7 @@ class CustomLoginView(LoginView):
 
     def get_success_url(self):
         return reverse_lazy('mono_app:index')
+
 
 class CustomLogoutView(LogoutView):
     template_name = 'registration/logout.html'
