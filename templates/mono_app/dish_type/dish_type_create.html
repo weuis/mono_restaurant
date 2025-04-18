@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container" style="max-width: 600px; margin-top: 40px;">
+  <h2 style="text-align:center;">Create New Dish Type</h2>
+
+  {% if messages %}
+    {% for message in messages %}
+      <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+    {% endfor %}
+  {% endif %}
+
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+
+    <div style="text-align:center; margin-top: 20px;">
+      <button type="submit" class="btn btn-dark">Create</button>
+    </div>
+  </form>
+
+  <div style="text-align:center; margin-top: 15px;">
+    <a href="{% url 'mono_app:dish-types' %}" class="text-black hover:underline" style="color: black">← Back to list</a>
+  </div>
+</div>
+{% endblock %}

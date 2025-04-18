@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="dish-type-detail">
+  <h1>Dish Type: {{ dish_type.name }}</h1>
+
+  <p><strong>Total Dishes:</strong> {{ dish_count }}</p>
+  <p><strong>Average Price:</strong> {{ avg_price|floatformat:2 }} ₴</p>
+
+  <h2>All Dishes</h2>
+  {% if dishes %}
+    <ul>
+      {% for dish in dishes %}
+        <li>
+          <strong>{{ dish.name }}</strong> – {{ dish.description }} ({{ dish.price }} ₴)
+          {% if dish.is_vegetarian %} <span style="color: green;">(Vegetarian)</span> {% endif %}
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>No dishes available for this type.</p>
+  {% endif %}
+
+  <h2>Vegetarian Dishes</h2>
+  {% if vegetarian_dishes %}
+    <ul>
+      {% for dish in vegetarian_dishes %}
+        <li>{{ dish.name }} – {{ dish.price }} ₴</li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>No vegetarian options in this category.</p>
+  {% endif %}
+
+  <h2>Cooks Working on This Type</h2>
+  {% if cooks %}
+    <ul>
+      {% for cook in cooks %}
+        <li>{{ cook.first_name }} {{ cook.last_name }}</li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>No cooks assigned to dishes of this type.</p>
+  {% endif %}
+</div>
+{% endblock %}

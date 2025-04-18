@@ -200,6 +200,44 @@ class DishTypeListView(generic.ListView):
         return context
 
 
+class DishTypeDetailView(generic.DetailView):
+    model = DishType
+    template_name = "mono_app/dish_type/dish_type_detail.html"
+    context_object_name = "dish_type"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        dish_type = self.get_object()
+
+        dishes = dish_type.dishes.prefetch_related("cooks").all()
+        context["dishes"] = dishes
+        context["dish_count"] = dishes.count()
+        context["vegetarian_dishes"] = dishes.filter(is_vegetarian=True)
+        context["cooks"] = set(cook for dish in dishes for cook in dish.cooks.all())
+
+        return context
+
+
+class DishTypeCreateView(generic.CreateView):
+    model = DishType
+    fields = ['name']
+    template_name = "mono_app/dish_type/dish_type_create.html"
+    success_url = reverse_lazy("dish_type_list")
+
+    def form_valid(self, form):
+        name = form.cleaned_data['name'].strip()
+
+        if DishType.objects.filter(name__iexact=name).exists():
+            form.add_error('name', "A dish type with this name already exists.")
+            return self.form_invalid(form)
+
+        form.instance.name = name
+
+        messages.success(self.request, f"Dish type '{name}' was created successfully.")
+        return super().form_valid(form)
+
+
+
 class IngredientListView(generic.ListView):
     model = Ingredient
     template_name = 'mono_app/ingredients/ingredient_list.html'
