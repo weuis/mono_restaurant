@@ -237,6 +237,36 @@ class DishTypeCreateView(generic.CreateView):
         return super().form_valid(form)
 
 
+class DishTypeUpdateView(generic.UpdateView):
+    model = DishType
+    fields = ['name']
+    template_name = "mono_app/dish_type/dish_type_update.html"
+    success_url = reverse_lazy("dish_type_list")
+    context_object_name = "dish_type"
+
+    def form_valid(self, form):
+        name = form.cleaned_data['name'].strip()
+
+        if DishType.objects.filter(name__iexact=name).exclude(pk=self.object.pk).exists():
+            form.add_error('name', "A dish type with this name already exists.")
+            return self.form_invalid(form)
+
+        form.instance.name = name
+        messages.success(self.request, f"Dish type '{name}' was successfully updated.")
+        return super().form_valid(form)
+
+
+class DishTypeDeleteView(generic.DeleteView):
+    model = DishType
+    template_name = "mono_app/dish_type/dish_type_delete.html"
+    success_url = reverse_lazy("dish_type_list")
+    context_object_name = "dish_type"
+
+    def delete(self, request, *args, **kwargs):
+        dish_type = self.get_object()
+        messages.success(request, f"Dish type '{dish_type.name}' was successfully deleted.")
+        return super().delete(request, *args, **kwargs)
+
 class IngredientListView(generic.ListView):
     model = Ingredient
     template_name = 'mono_app/ingredients/ingredient_list.html'
@@ -284,6 +314,7 @@ class IngredientCreateView(generic.CreateView):
         form.instance.name = name
         messages.success(self.request, f"Ingredient '{name}' was successfully created.")
         return super().form_valid(form)
+
 
 class CustomLoginView(LoginView):
     template_name = 'registration/login.html'
