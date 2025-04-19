@@ -267,6 +267,7 @@ class DishTypeDeleteView(generic.DeleteView):
         messages.success(request, f"Dish type '{dish_type.name}' was successfully deleted.")
         return super().delete(request, *args, **kwargs)
 
+
 class IngredientListView(generic.ListView):
     model = Ingredient
     template_name = 'mono_app/ingredients/ingredient_list.html'
@@ -314,6 +315,36 @@ class IngredientCreateView(generic.CreateView):
         form.instance.name = name
         messages.success(self.request, f"Ingredient '{name}' was successfully created.")
         return super().form_valid(form)
+
+
+class IngredientUpdateView(generic.UpdateView):
+    model = Ingredient
+    fields = ['name', 'is_allergen', 'unit', 'quantity']
+    template_name = 'mono_app/ingredients/ingredient_update.html'
+    context_object_name = 'ingredient'
+    success_url = reverse_lazy('ingredient_list')
+
+    def form_valid(self, form):
+        name = form.cleaned_data['name'].strip()
+        if Ingredient.objects.filter(name__iexact=name).exclude(pk=self.object.pk).exists():
+            form.add_error('name', 'An ingredient with this name already exists.')
+            return self.form_invalid(form)
+
+        form.instance.name = name
+        messages.success(self.request, f"Ingredient '{name}' was successfully updated.")
+        return super().form_valid(form)
+
+
+class IngredientDeleteView(generic.DeleteView):
+    model = Ingredient
+    template_name = 'mono_app/ingredients/ingredient_confirm_delete.html'
+    success_url = reverse_lazy('ingredient_list')
+    context_object_name = 'ingredient'
+
+    def delete(self, request, *args, **kwargs):
+        ingredient = self.get_object()
+        messages.success(request, f"Ingredient '{ingredient.name}' was successfully deleted.")
+        return super().delete(request, *args, **kwargs)
 
 
 class CustomLoginView(LoginView):

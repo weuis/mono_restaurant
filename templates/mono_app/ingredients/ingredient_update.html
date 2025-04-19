@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container" style="max-width: 600px; margin-top: 40px;">
+  <h2 class="text-center">Edit Ingredient</h2>
+
+  {% if messages %}
+    {% for message in messages %}
+      <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+    {% endfor %}
+  {% endif %}
+
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+
+    <div class="text-center mt-4">
+      <button type="submit" class="btn btn-dark">Update Ingredient</button>
+    </div>
+  </form>
+
+  <div class="text-center mt-3">
+    <a href="{% url 'mono_app:ingredient-list' %}" class="text-muted">← Back to Ingredients</a>
+  </div>
+</div>
+{% endblock %}

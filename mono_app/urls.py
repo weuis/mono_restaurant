@@ -18,7 +18,7 @@ from mono_app.views import (
     DishTypeDeleteView,
     IngredientListView,
     IngredientDetailView,
-    IngredientCreateView,
+    IngredientCreateView, IngredientUpdateView, IngredientDeleteView,
 )
 
 urlpatterns = [
@@ -42,6 +42,8 @@ urlpatterns = [
     path("ingredients/", IngredientListView.as_view(), name="ingredient-list"),
     path("ingredients/create/", IngredientCreateView.as_view(), name="ingredient_create"),
     path("ingredients/<int:pk>/", IngredientDetailView.as_view(), name="ingredient_detail"),
+    path("ingredients/<int:pk>/update/", IngredientUpdateView.as_view(), name="ingredient_update"),
+    path("ingredients/<int:pk>/delete/", IngredientDeleteView.as_view(), name="ingredient_delete"),
 ]
 
 app_name = "mono_app"
