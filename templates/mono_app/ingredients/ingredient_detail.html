@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container" style="max-width: 700px; margin-top: 40px;">
+  <h2 style="text-align:center;">🥬 Ingredient Details</h2>
+
+  <div style="border: 1px solid #ddd; padding: 20px; border-radius: 10px; background-color: #fff; margin-top: 20px;">
+    <p><strong>Name:</strong> {{ ingredient.name }}</p>
+    <p><strong>Quantity Available:</strong> {{ ingredient.quantity }} {{ ingredient.unit }}</p>
+    <p><strong>Is Allergen:</strong> 
+      {% if ingredient.is_allergen %}
+        <span style="color: red; font-weight: bold;">Yes</span>
+      {% else %}
+        No
+      {% endif %}
+    </p>
+  </div>
+
+  <h4 class="mt-4">Used in Dishes:</h4>
+  {% if dishes_with_ingredient %}
+    <ul>
+      {% for dish in dishes_with_ingredient %}
+        <li>{{ dish.name }} – {{ dish.price }} ₴</li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>No dishes are using this ingredient yet.</p>
+  {% endif %}
+
+  <div class="mt-4 text-center">
+    <a href="{% url 'mono_app:ingredient-list' %}" class="text-black hover:underline" style="color: black">← Back to Ingredients</a>
+  </div>
+</div>
+{% endblock %}

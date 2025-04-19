@@ -15,6 +15,8 @@ from mono_app.views import (
     DishTypeDetailView,
     DishTypeCreateView,
     IngredientListView,
+    IngredientDetailView,
+    IngredientCreateView,
 )
 
 urlpatterns = [
@@ -33,7 +35,9 @@ urlpatterns = [
     path('dishtypes/', DishTypeListView.as_view(),name='dish-types'),
     path("dishtypes/<int:pk>/", DishTypeDetailView.as_view(), name="dish_type_detail"),
     path("dishtypes/create/", DishTypeCreateView.as_view(), name="dish_type_create"),
-path("ingredients/", IngredientListView.as_view(), name="ingredient-list"),
+    path("ingredients/", IngredientListView.as_view(), name="ingredient-list"),
+    path("ingredients/create/", IngredientCreateView.as_view(), name="ingredient_create"),
+    path("ingredients/<int:pk>/", IngredientDetailView.as_view(), name="ingredient_detail"),
 ]
 
 app_name = "mono_app"

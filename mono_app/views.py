@@ -237,7 +237,6 @@ class DishTypeCreateView(generic.CreateView):
         return super().form_valid(form)
 
 
-
 class IngredientListView(generic.ListView):
     model = Ingredient
     template_name = 'mono_app/ingredients/ingredient_list.html'
@@ -256,6 +255,35 @@ class IngredientListView(generic.ListView):
         context["q"] = self.request.GET.get("q", "")
         return context
 
+
+class IngredientDetailView(generic.DetailView):
+    model = Ingredient
+    template_name = 'mono_app/ingredients/ingredient_detail.html'
+    context_object_name = 'ingredient'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        ingredient = self.get_object()
+        context['dishes_with_ingredient'] = ingredient.dishes.all()
+        return context
+
+
+class IngredientCreateView(generic.CreateView):
+    model = Ingredient
+    fields = ['name', 'is_allergen', 'unit', 'quantity']
+    template_name = 'mono_app/ingredients/ingredient_create.html'
+    success_url = reverse_lazy('ingredient_list')
+
+    def form_valid(self, form):
+        name = form.cleaned_data['name'].strip()
+
+        if Ingredient.objects.filter(name__iexact=name).exists():
+            form.add_error('name', 'An ingredient with this name already exists.')
+            return self.form_invalid(form)
+
+        form.instance.name = name
+        messages.success(self.request, f"Ingredient '{name}' was successfully created.")
+        return super().form_valid(form)
 
 class CustomLoginView(LoginView):
     template_name = 'registration/login.html'
