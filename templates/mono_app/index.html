@@ -38,13 +38,21 @@
 
 <section class="mb-5">
     <h2>Dish Types</h2>
-    <ul class="list-group list-group-horizontal-sm flex-wrap">
+    <div class="row">
         {% for type in dish_types %}
-            <li class="list-group-item flex-fill text-center">{{ type.name }}</li>
+            <div class="col-sm-6 col-md-4 col-lg-3 mb-4">
+                <div class="card h-100 text-center shadow-sm">
+                    <div class="card-body d-flex flex-column justify-content-center">
+                        <h5 class="card-title mb-0">{{ type.name }}</h5>
+                    </div>
+                </div>
+            </div>
         {% empty %}
-            <li class="list-group-item">No dish types added yet.</li>
+            <div class="col-12">
+                <p>No dish types added yet.</p>
+            </div>
         {% endfor %}
-    </ul>
+    </div>
 </section>
 
 <section>
