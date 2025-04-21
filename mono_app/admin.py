@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import DishType, Ingredient, Cook, Dish
+from mono_app.models import DishType, Ingredient, Cook, Dish
 
 @admin.register(DishType)
 class DishTypeAdmin(admin.ModelAdmin):

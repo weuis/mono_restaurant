@@ -13,6 +13,12 @@
   <button type="submit" class="btn btn-black">Search</button>
 </form>
 
+{% if user.is_authenticated %}
+  <div class="ml-auto">
+    <a href="{% url 'mono_app:cook-create' %}" class="text-dark hover:underline"> + Add New Cook </a>
+  </div>
+{% endif %}
+
 <div class="row">
   {% for cook in cooks %}
     <div class="col-md-4 mb-4">
@@ -35,6 +41,10 @@
               <small class="text-muted">{{ cook.bio|truncatewords:20 }}</small>
             {% endif %}
           </p>
+
+          <div class="mt-4 flex justify-between items-center">
+            <a href="{% url 'mono_app:cook-detail' cook.pk %}" class="text-dark hover:underline">Read More -></a>
+          </div>
         </div>
       </div>
     </div>

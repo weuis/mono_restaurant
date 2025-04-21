@@ -4,7 +4,7 @@
 {% block title %}Ingredients{% endblock %}
 
 {% block content %}
-<h1 class="mb-4"> Ingredients | Mono Kitchen Manage</h1>
+<h1 class="mb-4">Ingredients | Mono Kitchen Manager</h1>
 
 <form method="get" class="dish-search-form mb-4 d-flex flex-wrap gap-2">
   <label>
@@ -18,6 +18,12 @@
   <button type="submit" class="btn btn-black">Search</button>
 </form>
 
+{% if user.is_authenticated %}
+  <div class="ml-auto mb-4">
+    <a href="{% url 'mono_app:ingredient_create' %}" class="text-dark hover:underline">+ Add New Ingredient</a>
+  </div>
+{% endif %}
+
 {% if ingredients %}
 <div class="row">
   {% for ingredient in ingredients %}
@@ -25,9 +31,9 @@
     <div class="card h-100 shadow-sm">
       <div class="card-body">
         <h5 class="card-title text-capitalize d-flex justify-content-between">
-          {{ ingredient.name }}
+          <a href="{% url 'mono_app:ingredient_detail' ingredient.pk %}" class="text-dark hover:underline">{{ ingredient.name }}</a>
           {% if ingredient.is_allergen %}
-          <span class="badge badge-danger">Allergen</span>
+            <span class="badge badge-danger">Allergen</span>
           {% endif %}
         </h5>
         <p class="card-text mb-1"><strong>Quantity:</strong> {{ ingredient.quantity }} {{ ingredient.unit }}</p>
@@ -39,31 +45,31 @@
 
 <div class="mt-4">
   {% if is_paginated %}
-<nav>
-  <ul class="pagination justify-content-center">
-    {% if page_obj.has_previous %}
-      <li class="page-item">
-        <a class="page-link bg-transparent border-dark text-dark" href="?q={{ q }}&page={{ page_obj.previous_page_number }}">Previous</a>
-      </li>
-    {% endif %}
-    {% for num in paginator.page_range %}
-      {% if page_obj.number == num %}
-        <li class="page-item active">
-          <span class="page-link bg-dark text-white border-dark">{{ num }}</span>
-        </li>
-      {% elif num > page_obj.number|add:"-3" and num < page_obj.number|add:"3" %}
-        <li class="page-item">
-          <a class="page-link bg-transparent border-dark text-dark" href="?q={{ q }}&page={{ num }}">{{ num }}</a>
-        </li>
-      {% endif %}
-    {% endfor %}
-    {% if page_obj.has_next %}
-      <li class="page-item">
-        <a class="page-link bg-transparent border-dark text-dark" href="?q={{ q }}&page={{ page_obj.next_page_number }}">Next</a>
-      </li>
-    {% endif %}
-  </ul>
-</nav>
+    <nav>
+      <ul class="pagination justify-content-center">
+        {% if page_obj.has_previous %}
+          <li class="page-item">
+            <a class="page-link bg-transparent border-dark text-dark" href="?q={{ q }}&page={{ page_obj.previous_page_number }}">Previous</a>
+          </li>
+        {% endif %}
+        {% for num in paginator.page_range %}
+          {% if page_obj.number == num %}
+            <li class="page-item active">
+              <span class="page-link bg-dark text-white border-dark">{{ num }}</span>
+            </li>
+          {% elif num > page_obj.number|add:"-3" and num < page_obj.number|add:"3" %}
+            <li class="page-item">
+              <a class="page-link bg-transparent border-dark text-dark" href="?q={{ q }}&page={{ num }}">{{ num }}</a>
+            </li>
+          {% endif %}
+        {% endfor %}
+        {% if page_obj.has_next %}
+          <li class="page-item">
+            <a class="page-link bg-transparent border-dark text-dark" href="?q={{ q }}&page={{ page_obj.next_page_number }}">Next</a>
+          </li>
+        {% endif %}
+      </ul>
+    </nav>
   {% endif %}
 </div>
 {% else %}
