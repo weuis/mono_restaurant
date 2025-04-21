@@ -1,4 +1,71 @@
-.idea
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*.pyc
+*.pyo
+
+# Logs
+*.log
+
+# Unit test / coverage reports
+.coverage
+.tox/
+.nox/
+.pytest_cache/
+nosetests.xml
+coverage.xml
+htmlcov/
+*.cover
+
+# Environments
+.env
+.env.*
+.venv/
+venv/
+env/
+ENV/
+*.env
+
+# Django specific
 db.sqlite3
-venv
-__pycache__
+*.sqlite3
+mediafiles/
+staticfiles/
+*.mo
+*.pot
+
+# Ignore migration files, but keep __init__.py
+*/migrations/*.py
+!*/migrations/__init__.py
+
+# Static/media cache, but keep default images
+static/.DS_Store
+static/media/.DS_Store
+!static/media/default-dish.jpg
+!static/media/default_profile.jpg
+
+# IDE and editor folders
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Mac OS
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+
+# Node and frontend tools
+node_modules/
+npm-debug.log
+yarn-debug.log
+yarn-error.log
+
+# JetBrains
+*.iml
+*.ipr
+*.iws
+
+# Git merge conflicts
+*.orig
