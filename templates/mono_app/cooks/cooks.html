@@ -14,8 +14,8 @@
 </form>
 
 {% if user.is_authenticated %}
-  <div class="ml-auto">
-    <a href="{% url 'mono_app:cook-create' %}" class="text-dark hover:underline"> + Add New Cook </a>
+  <div class="mt-4 text-left">
+    <a href="{% url 'mono_app:cook-create' %}" class="btn btn-outline-secondary"> + Add New Cook </a>
   </div>
 {% endif %}
 
@@ -43,7 +43,7 @@
           </p>
 
           <div class="mt-4 flex justify-between items-center">
-            <a href="{% url 'mono_app:cook-detail' cook.pk %}" class="text-dark hover:underline">Read More -></a>
+            <a href="{% url 'mono_app:cook-detail' cook.pk %}" class="btn btn-outline-secondary">Read More -></a>
           </div>
         </div>
       </div>

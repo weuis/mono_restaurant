@@ -25,9 +25,9 @@
   </form>
 
   {% if user.is_authenticated %}
-    <div class="ml-auto">
-      <a href="{% url 'mono_app:dish-create' %}" class="text-dark hover:underline"> + Add New Dish </a>
-    </div>
+  <div class="mt-4 text-left">
+    <a href="{% url 'mono_app:dish-create' %}" class="btn btn-outline-secondary"> + Add New Dish </a>
+  </div>
   {% endif %}
 </div>
 
@@ -42,7 +42,7 @@
       </div>
 
       <div class="mt-4 flex justify-between items-center">
-        <a href="{% url 'mono_app:dish-detail' dish.pk %}" class="text-dark hover:underline">Read More -></a>
+        <a href="{% url 'mono_app:dish-detail' dish.pk %}" class="btn btn-outline-secondary">Read More -></a>
       </div>
     </div>
   {% endfor %}

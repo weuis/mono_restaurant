@@ -19,8 +19,8 @@
 </form>
 
 {% if user.is_authenticated %}
-  <div class="ml-auto mb-4">
-    <a href="{% url 'mono_app:ingredient_create' %}" class="text-dark hover:underline">+ Add New Ingredient</a>
+  <div class="mt-4 text-left">
+    <a href="{% url 'mono_app:ingredient_create' %}" class="btn btn-outline-secondary"> + Add New Ingredient </a>
   </div>
 {% endif %}
 

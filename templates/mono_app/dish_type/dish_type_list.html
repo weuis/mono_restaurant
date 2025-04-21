@@ -19,9 +19,8 @@
 </form>
 
 {% if user.is_authenticated %}
-  <div class="ml-auto">
-    <a href="{% url 'mono_app:dish_type_create' %}" class="text-dark hover:underline"> + Add New Dish Type </a>
-
+  <div class="mt-4 text-left">
+    <a href="{% url 'mono_app:dish_type_create' %}" class="btn btn-outline-secondary"> + Add New Dish Type </a>
   </div>
 {% endif %}
 

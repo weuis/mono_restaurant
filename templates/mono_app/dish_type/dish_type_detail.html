@@ -2,46 +2,79 @@
 {% load static %}
 
 {% block content %}
-<div class="dish-type-detail">
-  <h1>Dish Type: {{ dish_type.name }}</h1>
+<div class="container mt-5">
+    <div class="card shadow-lg p-5 rounded-4">
+        <h1 class="text-3xl font-bold mb-4">Dish Type: {{ dish_type.name }}</h1>
 
-  <p><strong>Total Dishes:</strong> {{ dish_count }}</p>
-  <p><strong>Average Price:</strong> {{ avg_price|floatformat:2 }} ₴</p>
+        {% if request.user.is_staff or request.user in dish_type.managers.all %}
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <div>
+                <a href="{% url 'mono_app:dish_type_update' dish_type.pk %}" class="btn btn-dark me-2">
+                    <i class="fas fa-edit"></i> Edit
+                </a>
+                <a href="{% url 'mono_app:dish_type_delete' dish_type.pk %}" class="btn btn-dark">
+                    <i class="fas fa-trash-alt"></i> Delete
+                </a>
+            </div>
+        </div>
+        {% endif %}
 
-  <h2>All Dishes</h2>
-  {% if dishes %}
-    <ul>
-      {% for dish in dishes %}
-        <li>
-          <strong>{{ dish.name }}</strong> – {{ dish.description }} ({{ dish.price }} ₴)
-          {% if dish.is_vegetarian %} <span style="color: green;">(Vegetarian)</span> {% endif %}
-        </li>
-      {% endfor %}
-    </ul>
-  {% else %}
-    <p>No dishes available for this type.</p>
-  {% endif %}
+        <div class="mb-4">
+            <p><strong>Total Dishes:</strong> {{ dish_count }}</p>
+            <p><strong>Average Price:</strong> {{ avg_price|floatformat:2 }} ₴</p>
+        </div>
 
-  <h2>Vegetarian Dishes</h2>
-  {% if vegetarian_dishes %}
-    <ul>
-      {% for dish in vegetarian_dishes %}
-        <li>{{ dish.name }} – {{ dish.price }} ₴</li>
-      {% endfor %}
-    </ul>
-  {% else %}
-    <p>No vegetarian options in this category.</p>
-  {% endif %}
+        <div class="mb-4">
+            <h2 class="text-2xl font-semibold">All Dishes</h2>
+            {% if dishes %}
+                <ul class="list-group">
+                    {% for dish in dishes %}
+                        <li class="list-group-item">
+                            <strong>{{ dish.name }}</strong> – {{ dish.description }} ({{ dish.price }} ₴)
+                            {% if dish.is_vegetarian %}
+                                <span class="badge bg-success text-white ms-2">Vegetarian</span>
+                            {% endif %}
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>No dishes available for this type.</p>
+            {% endif %}
+        </div>
 
-  <h2>Cooks Working on This Type</h2>
-  {% if cooks %}
-    <ul>
-      {% for cook in cooks %}
-        <li>{{ cook.first_name }} {{ cook.last_name }}</li>
-      {% endfor %}
-    </ul>
-  {% else %}
-    <p>No cooks assigned to dishes of this type.</p>
-  {% endif %}
+        <div class="mb-4">
+            <h2 class="text-2xl font-semibold">Vegetarian Dishes</h2>
+            {% if vegetarian_dishes %}
+                <ul class="list-group">
+                    {% for dish in vegetarian_dishes %}
+                        <li class="list-group-item">
+                            <strong>{{ dish.name }}</strong> – {{ dish.price }} ₴
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>No vegetarian options in this category.</p>
+            {% endif %}
+        </div>
+
+        <div class="mb-4">
+            <h2 class="text-2xl font-semibold">Cooks Working on This Type</h2>
+            {% if cooks %}
+                <ul class="list-group">
+                    {% for cook in cooks %}
+                        <li class="list-group-item">{{ cook.first_name }} {{ cook.last_name }}</li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>No cooks assigned to dishes of this type.</p>
+            {% endif %}
+        </div>
+
+        <div class="mt-4">
+            <a href="{% url 'mono_app:dish-types' %}" class="btn btn-outline-secondary">
+                ← Back to All Dish Types
+            </a>
+        </div>
+    </div>
 </div>
 {% endblock %}

@@ -23,8 +23,21 @@
             {% endif %}
         </div>
 
+        {% if request.user == cook or request.user.is_staff %}
+        <div class="mt-4 space-x-4">
+            <a href="{% url 'mono_app:cook-update' cook.pk %}" class="btn btn-dark">
+                <i class="fas fa-edit"></i> Edit
+            </a>
+            <a href="{% url 'mono_app:cook-delete' cook.pk %}" class="btn btn-dark">
+                <i class="fas fa-trash-alt"></i> Delete
+            </a>
+        </div>
+        {% endif %}
+
         <div class="mt-4 text-center">
-          <a href="{% url 'mono_app:cooks' %}" class="text-black hover:underline" style="color: black">← Back to all cooks</a>
+          <a href="{% url 'mono_app:cooks' %}" class="btn btn-outline-secondary">
+            ← Back to All Cooks
+          </a>
         </div>
     </div>
 </div>
