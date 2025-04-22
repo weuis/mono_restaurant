@@ -38,6 +38,19 @@ def index(request: HttpRequest) -> HttpResponse:
     )
 
 
+class CookProfileView(LoginRequiredMixin, generic.DetailView):
+    model = Cook
+    template_name = 'registration/personal_profile.html'
+    context_object_name = 'cook'
+
+    def get_object(self):
+        return self.request.user
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['dishes'] = self.request.user.dishes.all()
+        return context
+
 # ----------------- DISH ----------------- #
 
 class DishListView(generic.ListView):

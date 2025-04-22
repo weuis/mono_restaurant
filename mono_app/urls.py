@@ -1,6 +1,7 @@
 from django.urls import path
 from mono_app.views import (
     index,
+    CookProfileView,
     DishListView,
     DishDetailView,
     DishCreateView,
@@ -18,11 +19,14 @@ from mono_app.views import (
     DishTypeDeleteView,
     IngredientListView,
     IngredientDetailView,
-    IngredientCreateView, IngredientUpdateView, IngredientDeleteView,
+    IngredientCreateView,
+    IngredientUpdateView,
+    IngredientDeleteView,
 )
 
 urlpatterns = [
     path("", index, name="index"),
+    path("my-account/", CookProfileView.as_view(), name="account"),
     path('dishes/', DishListView.as_view(), name='dish-list'),
     path('dishes/<int:pk>/', DishDetailView.as_view(), name='dish-detail'),
     path('dishes/create/', DishCreateView.as_view(), name='dish-create'),

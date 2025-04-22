@@ -16,12 +16,15 @@
     </div>
     <div class="d-none d-lg-flex ms-auto">
       {% if user.is_authenticated %}
-        <form action="{% url 'logout' %}" method="post">
-          {% csrf_token %}
-          <button type="submit" class="btn btn-main">Logout</button>
-        </form>
+        <div class="d-flex align-items-center gap-2">
+            <a href="{% url 'mono_app:account' %}" class="btn btn-dark">My account</a>
+            <form action="{% url 'logout' %}" method="post" class="mb-0">
+              {% csrf_token %}
+              <button type="submit" class="btn btn-dark ml-2">Logout</button>
+            </form>
+        </div>
       {% else %}
-        <a href="{% url 'login' %}" class="btn btn-main">Login</a>
+        <a href="{% url 'login' %}" class="btn btn-dark">Login</a>
       {% endif %}
     </div>
   </div>
