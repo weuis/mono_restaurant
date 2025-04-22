@@ -1,4 +1,6 @@
 from django.urls import path
+from django.conf import settings
+from django.conf.urls.static import static
 from mono_app.views import (
     index,
     CookProfileView,
@@ -49,5 +51,8 @@ urlpatterns = [
     path("ingredients/<int:pk>/update/", IngredientUpdateView.as_view(), name="ingredient_update"),
     path("ingredients/<int:pk>/delete/", IngredientDeleteView.as_view(), name="ingredient_delete"),
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 app_name = "mono_app"

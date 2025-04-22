@@ -38,11 +38,11 @@ staticfiles/
 */migrations/*.py
 !*/migrations/__init__.py
 
-# Static/media cache, but keep default images
+# Static/profile-image cache, but keep default images
 static/.DS_Store
-static/media/.DS_Store
-!static/media/default-dish.jpg
-!static/media/default_profile.jpg
+static/profile-image/.DS_Store
+!static/profile-image/default-dish.jpg
+!static/profile-image/default_profile.jpg
 
 # IDE and editor folders
 .vscode/
