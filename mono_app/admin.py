@@ -1,4 +1,5 @@
 from django.contrib import admin
+from django.contrib.auth.admin import UserAdmin
 from mono_app.models import DishType, Ingredient, Cook, Dish
 
 @admin.register(DishType)
@@ -13,7 +14,7 @@ class IngredientAdmin(admin.ModelAdmin):
     search_fields = ("name",)
 
 @admin.register(Cook)
-class CookAdmin(admin.ModelAdmin):
+class CookAdmin(UserAdmin):
     list_display = ("username", "first_name", "last_name", "specialization", "years_of_experience")
     list_filter = ("specialization",)
     search_fields = ("username", "first_name", "last_name", "specialization")

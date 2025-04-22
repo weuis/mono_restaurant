@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container mx-auto px-6 py-12 bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 rounded-3xl shadow-xl">
+  <div class="flex flex-col items-center md:flex-row md:justify-between md:gap-12">
+
+    <!-- Profile Picture -->
+    <div class="relative mb-6 md:mb-0">
+      {% if cook.profile_picture %}
+        <img src="{{ cook.profile_picture.url }}" alt="Profile Picture" class="w-44 h-44 rounded-full object-cover border-4 border-white shadow-lg transform transition duration-500 hover:scale-110" />
+      {% else %}
+        <img src="{% static 'media/default_profile.jpg' %}" alt="Default Profile" class="w-44 h-44 rounded-full object-cover border-4 border-white shadow-lg transform transition duration-500 hover:scale-110" />
+      {% endif %}
+      <div class="absolute inset-0 bg-gradient-to-t from-black opacity-25 rounded-full hover:opacity-0 transition-opacity"></div>
+    </div>
+
+    <!-- Profile Info -->
+    <div class="text-center md:text-left">
+      <h2 class="text-4xl font-bold text-white">{{ cook.user.first_name }} {{ cook.user.last_name }}</h2>
+      <p class="text-lg text-white opacity-80">@{{ cook.user.username }}</p>
+      <p class="text-lg text-white opacity-80">{{ cook.user.email }}</p>
+      {% if cook.bio %}
+        <p class="mt-4 text-lg italic text-white opacity-90">"{{ cook.bio }}"</p>
+      {% endif %}
+
+      <div class="mt-6 space-x-4">
+        <a href="{% url 'logout' %}" class="bg-red-600 text-white px-6 py-3 rounded-full shadow-md transform transition-all duration-300 hover:bg-red-700">Logout</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Dishes Section -->
+  <div class="mt-16 text-center">
+    <h3 class="text-3xl font-semibold text-white mb-6">🍽️ Dishes Created by {{ cook.user.first_name }}</h3>
+    {% if dishes %}
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        {% for dish in dishes %}
+          <div class="bg-white p-6 rounded-lg shadow-xl transition-all duration-300 transform hover:scale-105">
+            <div class="flex flex-col items-center">
+              <strong class="text-xl font-bold text-gray-900">{{ dish.name }}</strong>
+              <p class="text-gray-600 mt-2">{{ dish.description }}</p>
+              <p class="text-gray-800 font-semibold mt-2">{{ dish.price }} ₴</p>
+              {% if dish.is_vegetarian %}
+                <span class="text-green-600 font-medium mt-2">(Vegetarian)</span>
+              {% endif %}
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    {% else %}
+      <p class="text-white text-lg">No dishes created yet.</p>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}
