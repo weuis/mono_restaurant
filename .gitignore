@@ -44,6 +44,10 @@ static/profile-image/.DS_Store
 !static/profile-image/default-dish.jpg
 !static/profile-image/default_profile.jpg
 
+# Pictures
+media/
+static/profile-image/
+
 # IDE and editor folders
 .vscode/
 .idea/
