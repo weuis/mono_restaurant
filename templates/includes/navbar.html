@@ -17,7 +17,7 @@
     <div class="d-none d-lg-flex ms-auto">
       {% if user.is_authenticated %}
         <div class="d-flex align-items-center gap-2">
-            <a href="{% url 'mono_app:account' %}" class="btn btn-dark">My account</a>
+            <a href="{% url 'mono_app:personal-profile' %}" class="btn btn-dark">My account</a>
             <form action="{% url 'logout' %}" method="post" class="mb-0">
               {% csrf_token %}
               <button type="submit" class="btn btn-dark ml-2">Logout</button>
