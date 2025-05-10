@@ -1,0 +1,390 @@
+[
+{
+    "model": "mono_app.dishtype",
+    "pk": 1,
+    "fields": {
+        "name": "Pasta"
+    }
+},
+{
+    "model": "mono_app.dishtype",
+    "pk": 2,
+    "fields": {
+        "name": "Appetizer"
+    }
+},
+{
+    "model": "mono_app.ingredient",
+    "pk": 1,
+    "fields": {
+        "name": "Fettuccine Pasta",
+        "is_allergen": true,
+        "unit": "grams",
+        "quantity": 200.0
+    }
+},
+{
+    "model": "mono_app.ingredient",
+    "pk": 2,
+    "fields": {
+        "name": "Heavy Cream",
+        "is_allergen": true,
+        "unit": "ml",
+        "quantity": 150.0
+    }
+},
+{
+    "model": "mono_app.ingredient",
+    "pk": 3,
+    "fields": {
+        "name": "Parmesan Cheese",
+        "is_allergen": true,
+        "unit": "grams",
+        "quantity": 50.0
+    }
+},
+{
+    "model": "mono_app.ingredient",
+    "pk": 4,
+    "fields": {
+        "name": "Truffle Oil",
+        "is_allergen": false,
+        "unit": "ml",
+        "quantity": 10.0
+    }
+},
+{
+    "model": "mono_app.ingredient",
+    "pk": 5,
+    "fields": {
+        "name": "Wild Mushrooms",
+        "is_allergen": false,
+        "unit": "grams",
+        "quantity": 120.0
+    }
+},
+{
+    "model": "mono_app.ingredient",
+    "pk": 6,
+    "fields": {
+        "name": "Olive Oil",
+        "is_allergen": false,
+        "unit": "ml",
+        "quantity": 20.0
+    }
+},
+{
+    "model": "mono_app.ingredient",
+    "pk": 7,
+    "fields": {
+        "name": "White Wine",
+        "is_allergen": false,
+        "unit": "ml",
+        "quantity": 20.0
+    }
+},
+{
+    "model": "mono_app.ingredient",
+    "pk": 8,
+    "fields": {
+        "name": "Fresh Parsley",
+        "is_allergen": false,
+        "unit": "grams",
+        "quantity": 5.0
+    }
+},
+{
+    "model": "mono_app.ingredient",
+    "pk": 9,
+    "fields": {
+        "name": "Bread",
+        "is_allergen": true,
+        "unit": "pcs",
+        "quantity": 2.0
+    }
+},
+{
+    "model": "mono_app.ingredient",
+    "pk": 10,
+    "fields": {
+        "name": "Tomato",
+        "is_allergen": false,
+        "unit": "grams",
+        "quantity": 80.0
+    }
+},
+{
+    "model": "mono_app.ingredient",
+    "pk": 11,
+    "fields": {
+        "name": "Garlic",
+        "is_allergen": false,
+        "unit": "grams",
+        "quantity": 10.0
+    }
+},
+{
+    "model": "mono_app.ingredient",
+    "pk": 12,
+    "fields": {
+        "name": "Basil",
+        "is_allergen": false,
+        "unit": "grams",
+        "quantity": 5.0
+    }
+},
+{
+    "model": "mono_app.ingredient",
+    "pk": 13,
+    "fields": {
+        "name": "Mushrooms",
+        "is_allergen": false,
+        "unit": "pcs",
+        "quantity": 5.0
+    }
+},
+{
+    "model": "mono_app.ingredient",
+    "pk": 14,
+    "fields": {
+        "name": "Cream Cheese",
+        "is_allergen": true,
+        "unit": "grams",
+        "quantity": 50.0
+    }
+},
+{
+    "model": "mono_app.ingredient",
+    "pk": 15,
+    "fields": {
+        "name": "Herbs",
+        "is_allergen": false,
+        "unit": "grams",
+        "quantity": 5.0
+    }
+},
+{
+    "model": "mono_app.ingredient",
+    "pk": 16,
+    "fields": {
+        "name": "Breadcrumbs",
+        "is_allergen": true,
+        "unit": "grams",
+        "quantity": 15.0
+    }
+},
+{
+    "model": "mono_app.ingredient",
+    "pk": 17,
+    "fields": {
+        "name": "Pancetta",
+        "is_allergen": true,
+        "unit": "grams",
+        "quantity": 80.0
+    }
+},
+{
+    "model": "mono_app.ingredient",
+    "pk": 18,
+    "fields": {
+        "name": "Egg",
+        "is_allergen": true,
+        "unit": "grams",
+        "quantity": 50.0
+    }
+},
+{
+    "model": "mono_app.cook",
+    "pk": 1,
+    "fields": {
+        "password": "pbkdf2_sha256$1000000$EfrpP9IoF0lTHXHdQ6C97p$E+SsB8Cqt18GoNl5JqY/aNVib24lTSXxYId+thxQDDA=",
+        "last_login": "2025-04-22T16:31:54.135Z",
+        "is_superuser": true,
+        "username": "owner_admin",
+        "first_name": "Taras",
+        "last_name": "Shevchenko",
+        "email": "shevchenko@owner.com",
+        "is_staff": true,
+        "is_active": true,
+        "date_joined": "2025-04-08T17:06:25Z",
+        "years_of_experience": 10,
+        "bio": "Chef Taras Shevchenko is a talented culinary expert with over 10 years of experience in Ukrainian and European cuisine. He graduated from the Kyiv Culinary Academy and refined his skills in top restaurants across France, Italy, and Scandinavia.\r\n\r\nReturning to Ukraine, he led several prestigious kitchens, blending traditional and modern flavors using local, seasonal ingredients. Chef Shevchenko is known for his innovative approach to cooking and his commitment to exceptional quality in every dish.",
+        "specialization": "Chef",
+        "profile_picture": "",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "mono_app.cook",
+    "pk": 5,
+    "fields": {
+        "password": "pbkdf2_sha256$1000000$UL8to2EZwGYLQuxTsKCppy$6Dc/f8MzCOOpwLsGAF9LfXFwnOE19p1HSQi09uixBBk=",
+        "last_login": "2025-04-22T13:53:44.420Z",
+        "is_superuser": true,
+        "username": "alex",
+        "first_name": "Alex",
+        "last_name": "Rozehan",
+        "email": "alex@rozehan.com",
+        "is_staff": true,
+        "is_active": true,
+        "date_joined": "2025-04-12T10:43:27Z",
+        "years_of_experience": 1,
+        "bio": "Trainer",
+        "specialization": "Trainer",
+        "profile_picture": "",
+        "groups": [],
+        "user_permissions": [
+            33,
+            34,
+            35,
+            36,
+            5,
+            6,
+            7,
+            8,
+            1,
+            2,
+            3,
+            4,
+            9,
+            10,
+            11,
+            12,
+            25,
+            26,
+            27,
+            28,
+            29,
+            30,
+            31,
+            32,
+            17,
+            18,
+            19,
+            20,
+            21,
+            22,
+            23,
+            24,
+            13,
+            14,
+            15,
+            16
+        ]
+    }
+},
+{
+    "model": "mono_app.cook",
+    "pk": 6,
+    "fields": {
+        "password": "12345",
+        "last_login": null,
+        "is_superuser": true,
+        "username": "john",
+        "first_name": "John",
+        "last_name": "Devis",
+        "email": "john@devis.com",
+        "is_staff": true,
+        "is_active": true,
+        "date_joined": "2025-04-12T11:00:34Z",
+        "years_of_experience": 3,
+        "bio": "Helper",
+        "specialization": "Helper",
+        "profile_picture": "",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "mono_app.dish",
+    "pk": 1,
+    "fields": {
+        "name": "Creamy Truffle Mushroom Fettuccine",
+        "description": "A luxurious blend of silky fettuccine pasta tossed in a rich and velvety truffle-infused cream sauce. Sautéed wild mushrooms, garlic, and a hint of parmesan bring depth and umami, while a touch of white wine adds elegance. Garnished with fresh parsley and a drizzle of truffle oil for an unforgettable finish.",
+        "price": "50.00",
+        "dish_type": 1,
+        "is_vegetarian": true,
+        "image": "Fetuccini.png",
+        "cooks": [
+            6
+        ],
+        "ingredients": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8
+        ]
+    }
+},
+{
+    "model": "mono_app.dish",
+    "pk": 2,
+    "fields": {
+        "name": "Tomato Bruschetta",
+        "description": "Grilled bread topped with fresh tomatoes, garlic, basil, and olive oil.",
+        "price": "8.50",
+        "dish_type": 2,
+        "is_vegetarian": true,
+        "image": "Tomato_Bruschetta.jpg",
+        "cooks": [
+            5
+        ],
+        "ingredients": [
+            6,
+            9,
+            10,
+            11,
+            12
+        ]
+    }
+},
+{
+    "model": "mono_app.dish",
+    "pk": 3,
+    "fields": {
+        "name": "Stuffed Mushrooms",
+        "description": "Mushroom caps filled with herbed cream cheese and breadcrumbs.",
+        "price": "9.00",
+        "dish_type": 2,
+        "is_vegetarian": true,
+        "image": "Stuffed_mushrooms.jpg",
+        "cooks": [
+            1
+        ],
+        "ingredients": [
+            13,
+            14,
+            15,
+            16
+        ]
+    }
+},
+{
+    "model": "mono_app.dish",
+    "pk": 4,
+    "fields": {
+        "name": "Spaghetti Carbonara",
+        "description": "Classic Italian pasta made with eggs, cheese, pancetta, and black pepper.",
+        "price": "42.00",
+        "dish_type": 1,
+        "is_vegetarian": false,
+        "image": "Carbonara.png",
+        "cooks": [
+            5
+        ],
+        "ingredients": [
+            1,
+            3,
+            6,
+            12,
+            17,
+            18
+        ]
+    }
+}
+]
