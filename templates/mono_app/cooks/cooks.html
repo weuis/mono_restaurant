@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Cooks{% endblock %}
+
+{% block content %}
+<h1 class="text-3xl font-bold mb-4">Cooks | Mono Kitchen Manager</h1>
+
+<form method="get" class="form-inline mb-4">
+  <label>
+    <input type="text" name="q" class="form-control mr-2" placeholder="Search cooks..." value="{{ request.GET.q }}">
+  </label>
+  <button type="submit" class="btn btn-black">Search</button>
+</form>
+
+{% if user.is_authenticated %}
+  <div class="mt-4 text-left">
+    <a href="{% url 'mono_app:cook-create' %}" class="btn btn-outline-secondary"> + Add New Cook </a>
+  </div>
+{% endif %}
+
+<div class="row">
+  {% for cook in cooks %}
+    <div class="col-md-4 mb-4">
+      <div class="card h-100">
+        {% if cook.profile_picture %}
+          <img src="{{ cook.profile_picture.url }}" class="card-img-top" alt="{{ cook.username }}">
+        {% else %}
+          <img src="{% static 'profile-image/default_profile.jpg' %}" class="card-img-top" alt="No image">
+        {% endif %}
+        <div class="card-body">
+          <h5 class="card-title">{{ cook.first_name }} {{ cook.last_name }}</h5>
+          <p class="card-text">
+            <strong>Username:</strong> {{ cook.username }}<br>
+            <strong>Email:</strong> {{ cook.email }}<br>
+            <strong>Experience:</strong> {{ cook.years_of_experience }} years<br>
+            {% if cook.specialization %}
+              <strong>Specialization:</strong> {{ cook.specialization }}<br>
+            {% endif %}
+            {% if cook.bio %}
+              <small class="text-muted">{{ cook.bio|truncatewords:20 }}</small>
+            {% endif %}
+          </p>
+
+          <div class="mt-4 flex justify-between items-center">
+            <a href="{% url 'mono_app:cook-detail' cook.pk %}" class="btn btn-outline-secondary">Read More -></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  {% empty %}
+    <div class="col-12">
+      <p>No cooks found.</p>
+    </div>
+  {% endfor %}
+</div>
+
+<div class="mt-4">
+  {% if is_paginated %}
+    <nav>
+      <ul class="pagination justify-content-center">
+        {% if page_obj.has_previous %}
+          <li class="page-item">
+            <a class="page-link" href="?q={{ request.GET.q }}&page=1">First</a>
+          </li>
+          <li class="page-item">
+            <a class="page-link" href="?q={{ request.GET.q }}&page={{ page_obj.previous_page_number }}">Previous</a>
+          </li>
+        {% endif %}
+
+        <li class="page-item active">
+          <span class="page-link">{{ page_obj.number }}</span>
+        </li>
+
+        {% if page_obj.has_next %}
+          <li class="page-item">
+            <a class="page-link" href="?q={{ request.GET.q }}&page={{ page_obj.next_page_number }}">Next</a>
+          </li>
+          <li class="page-item">
+            <a class="page-link" href="?q={{ request.GET.q }}&page={{ page_obj.paginator.num_pages }}">Last</a>
+          </li>
+        {% endif %}
+      </ul>
+    </nav>
+  {% endif %}
+</div>
+{% endblock %}

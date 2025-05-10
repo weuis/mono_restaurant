@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Dishes Type List{% endblock %}
+
+{% block content %}
+<h1 class="text-3xl font-bold mb-4">Dish Types | Mono Kitchen Manager</h1>
+
+<form method="get" class="dish-search-form mb-4 d-flex flex-wrap gap-2">
+  <label>
+    <input
+      type="text"
+      name="q"
+      class="form-control custom-search-input"
+      placeholder="Search dish types..."
+      value="{{ q }}">
+  </label>
+  <button type="submit" class="btn btn-black">Search</button>
+</form>
+
+{% if user.is_authenticated %}
+  <div class="mt-4 text-left">
+    <a href="{% url 'mono_app:dish_type_create' %}" class="btn btn-outline-secondary"> + Add New Dish Type </a>
+  </div>
+{% endif %}
+
+{% if dish_types %}
+<div class="row">
+  {% for dish in dish_types %}
+  <div class="col-md-4 mb-4">
+    <div class="card h-100 shadow-sm">
+      <div class="card-body text-center">
+        <h5 class="card-title text-capitalize">
+          <a href="{% url 'mono_app:dish_type_detail' dish.pk %}" class="text-dark hover:underline">{{ dish.name }}</a>
+        </h5>
+      </div>
+
+    </div>
+  </div>
+  {% endfor %}
+</div>
+
+<div class="mt-4">
+  {% if is_paginated %}
+    <nav>
+      <ul class="pagination justify-content-center">
+        {% if page_obj.has_previous %}
+          <li class="page-item">
+            <a class="page-link" href="?q={{ q }}&page={{ page_obj.previous_page_number }}">Previous</a>
+          </li>
+        {% endif %}
+
+        {% for num in paginator.page_range %}
+          {% if page_obj.number == num %}
+            <li class="page-item active"><span class="page-link">{{ num }}</span></li>
+          {% elif num > page_obj.number|add:"-3" and num < page_obj.number|add:"3" %}
+            <li class="page-item"><a class="page-link" href="?q={{ q }}&page={{ num }}">{{ num }}</a></li>
+          {% endif %}
+        {% endfor %}
+
+        {% if page_obj.has_next %}
+          <li class="page-item">
+            <a class="page-link" href="?q={{ q }}&page={{ page_obj.next_page_number }}">Next</a>
+          </li>
+        {% endif %}
+      </ul>
+    </nav>
+  {% endif %}
+</div>
+{% else %}
+  <p>No dish types found.</p>
+{% endif %}
+{% endblock %}

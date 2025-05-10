@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container" style="max-width: 700px; margin-top: 40px;">
+  <h2 style="text-align:center;">Ingredient Details</h2>
+
+  <div style="border: 1px solid #ddd; padding: 20px; border-radius: 10px; background-color: #fff; margin-top: 20px;">
+    <p><strong>Name:</strong> {{ ingredient.name }}</p>
+    <p><strong>Quantity Available:</strong> {{ ingredient.quantity }} {{ ingredient.unit }}</p>
+    <p><strong>Is Allergen:</strong> 
+      {% if ingredient.is_allergen %}
+        <span style="color: red; font-weight: bold;">Yes</span>
+      {% else %}
+        No
+      {% endif %}
+    </p>
+  </div>
+
+  <h4 class="mt-4">Used in Dishes:</h4>
+  {% if dishes_with_ingredient %}
+    <ul>
+      {% for dish in dishes_with_ingredient %}
+        <li>{{ dish.name }} – {{ dish.price }} ₴</li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>No dishes are using this ingredient yet.</p>
+  {% endif %}
+
+  {% if request.user.is_staff or request.user in ingredient.managers.all %}
+  <div class="d-flex justify-content-between align-items-center mb-3 mt-4">
+    <div>
+      <a href="{% url 'mono_app:ingredient_update' ingredient.pk %}" class="btn btn-dark me-2">
+        <i class="fas fa-edit"></i> Edit
+      </a>
+      <a href="{% url 'mono_app:ingredient_delete' ingredient.pk %}" class="btn btn-dark">
+        <i class="fas fa-trash-alt"></i> Delete
+      </a>
+    </div>
+  </div>
+  {% endif %}
+
+  <div class="mt-4 text-center">
+    <a href="{% url 'mono_app:ingredient-list' %}" class="btn btn-outline-secondary">
+      ← Back to Ingredients
+    </a>
+  </div>
+</div>
+{% endblock %}

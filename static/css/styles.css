@@ -1,0 +1,125 @@
+:root {
+    --primary-color: #292F36;
+    --accent-color: #F7C59F;
+    --bg-color: #FAFAFA;
+    --text-color: #333;
+    --radius: 10px;
+    --padding: 1rem;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    line-height: 1.6;
+    padding-top: 70px;
+}
+
+a {
+    transition: color 0.2s ease-in-out;
+}
+
+a:hover {
+    color: var(--accent-color);
+    text-decoration: none;
+}
+
+main.container {
+    background-color: #fff;
+    padding: 2rem;
+    border-radius: var(--radius);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.05);
+}
+
+.navbar {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-brand {
+    font-weight: bold;
+    color: var(--primary-color) !important;
+}
+
+.navbar-light .navbar-nav .nav-link {
+    color: var(--primary-color);
+    font-weight: 500;
+}
+
+.navbar-light .navbar-nav .nav-link.active,
+.navbar-light .navbar-nav .nav-link:hover {
+    color: var(--accent-color);
+}
+
+.card {
+    border-radius: var(--radius);
+}
+
+.card-img-top {
+    object-fit: cover;
+    height: 200px;
+}
+
+footer {
+    background-color: #f8f9fa;
+    color: #666;
+    font-size: 0.9rem;
+    border-top: 1px solid #e0e0e0;
+}
+
+footer a {
+    color: var(--primary-color);
+}
+
+footer a:hover {
+    color: var(--accent-color);
+}
+
+h1, h2, h3, h4 {
+    color: var(--primary-color);
+}
+
+.lead {
+    color: #666;
+}
+
+
+.text-center {
+    text-align: center;
+}
+
+.mt-4 {
+    margin-top: 1.5rem !important;
+}
+
+.mt-5 {
+    margin-top: 3rem !important;
+}
+
+.mb-5 {
+    margin-bottom: 3rem !important;
+}
+
+.btn-main {
+    background-color: var(--primary-color);
+    color: #fff;
+    font-weight: 600;
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: var(--radius);
+    transition: background-color 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.btn-main:hover {
+    background-color: var(--accent-color);
+    color: #000;
+}
+
+
+

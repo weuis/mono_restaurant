@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Dishes{% endblock %}
+
+{% block content %}
+<h1 class="text-3xl font-bold mb-6">Dishes | Mono Kitchen Manager</h1>
+
+<div class="flex items-center justify-between mb-6">
+  <form method="get" class="flex gap-4">
+    <label>
+      <input type="text" name="q" value="{{ search_query }}" placeholder="Search..." class="border p-2 rounded w-60">
+    </label>
+
+    <label>
+      <select name="type" class="border p-2 rounded">
+        <option value="">All Types</option>
+        {% for type in dish_types %}
+          <option value="{{ type.name }}" {% if type.name == selected_type %}selected{% endif %}>{{ type.name }}</option>
+        {% endfor %}
+      </select>
+    </label>
+
+    <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Filter</button>
+  </form>
+
+  {% if user.is_authenticated %}
+  <div class="mt-4 text-left">
+    <a href="{% url 'mono_app:dish-create' %}" class="btn btn-outline-secondary"> + Add New Dish </a>
+  </div>
+  {% endif %}
+</div>
+
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+  {% for dish in dishes %}
+    <div class="p-4 border rounded-xl shadow hover:shadow-lg transition bg-white flex flex-col justify-between">
+      <div>
+        <h2 class="text-xl font-semibold mb-2">{{ dish.name }}</h2>
+        <p class="mb-2">{{ dish.description|truncatechars:100 }}</p>
+        <p class="mb-1"><strong>Type:</strong> {{ dish.dish_type }}</p>
+        <p class="mb-1"><strong>Price:</strong> ${{ dish.price }}</p>
+      </div>
+
+      <div class="mt-4 flex justify-between items-center">
+        <a href="{% url 'mono_app:dish-detail' dish.pk %}" class="btn btn-outline-secondary">Read More -></a>
+      </div>
+    </div>
+  {% endfor %}
+</div>
+
+<div class="mt-8">
+  {% if is_paginated %}
+    <div class="flex gap-2 items-center justify-center">
+      {% if page_obj.has_previous %}
+        <a href="?{% if selected_type %}type={{ selected_type }}&{% endif %}{% if search_query %}q={{ search_query }}&{% endif %}page={{ page_obj.previous_page_number }}" class="px-3 py-1 border rounded">Previous</a>
+      {% endif %}
+
+      <span class="px-3 py-1 border rounded bg-gray-200">Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</span>
+
+      {% if page_obj.has_next %}
+        <a href="?{% if selected_type %}type={{ selected_type }}&{% endif %}{% if search_query %}q={{ search_query }}&{% endif %}page={{ page_obj.next_page_number }}" class="px-3 py-1 border rounded">Next</a>
+      {% endif %}
+    </div>
+  {% endif %}
+</div>
+{% endblock %}

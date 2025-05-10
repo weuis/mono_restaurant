@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Home | Mono Restaurant Kitchen{% endblock %}
+
+{% block content %}
+<div class="text-center mb-5">
+    <h1 class="display-4">Welcome to Our Kitchen Control System</h1>
+    <p class="lead">Manage your cooks, dishes, and kitchen workflow with ease.</p>
+</div>
+<section class="mb-5">
+    <h2>Featured Dishes</h2>
+    <div class="row">
+        {% for dish in latest_dishes %}
+            <div class="col-md-4">
+                <div class="card mb-4 shadow-sm h-100">
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title">{{ dish.name }}</h5>
+                        <p class="card-text">{{ dish.description|truncatewords:15 }}</p>
+                        <p><strong>Type:</strong> {{ dish.dish_type.name }}</p>
+                        <p><strong>Price:</strong> ${{ dish.price }}</p>
+                        <p><strong>Cooks:</strong>
+                            {% for cook in dish.cooks.all %}
+                                {{ cook.username }}{% if not forloop.last %}, {% endif %}
+                            {% endfor %}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        {% empty %}
+            <div class="col-12">
+                <p>No dishes found.</p>
+            </div>
+        {% endfor %}
+    </div>
+</section>
+
+<section class="mb-5">
+    <h2>Dish Types</h2>
+    <div class="row">
+        {% for type in dish_types %}
+            <div class="col-sm-6 col-md-4 col-lg-3 mb-4">
+                <div class="card h-100 text-center shadow-sm">
+                    <div class="card-body d-flex flex-column justify-content-center">
+                        <h5 class="card-title mb-0">{{ type.name }}</h5>
+                    </div>
+                </div>
+            </div>
+        {% empty %}
+            <div class="col-12">
+                <p>No dish types added yet.</p>
+            </div>
+        {% endfor %}
+    </div>
+</section>
+
+<section>
+    <h2>Our Cooks</h2>
+    <div class="row">
+        {% for cook in top_cooks %}
+            <div class="col-md-3 mb-4">
+                <div class="card text-center h-100 shadow-sm">
+                    {% if cook.profile_picture %}
+                        <img src="{{ cook.profile_picture.url }}" class="card-img-top" alt="{{ cook.username }}">
+                    {% else %}
+                        <img src="{% static 'profile-image/default_profile.jpg' %}" class="card-img-top" alt="Cook">
+                    {% endif %}
+                    <div class="card-body">
+                        <h5 class="card-title">{{ cook.first_name }} {{ cook.last_name }}</h5>
+                        <p class="card-text">
+                            <strong>Experience:</strong> {{ cook.years_of_experience }} yrs
+                        </p>
+                        {% if cook.specialization %}
+                            <p class="text-muted">{{ cook.specialization }}</p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        {% empty %}
+            <div class="col-12">
+                <p>No cooks available yet.</p>
+            </div>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}
