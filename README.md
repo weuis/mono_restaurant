@@ -35,3 +35,7 @@
 - PostgreSQL
 - pytest for testing 
 - black, flake8, mypy for code quality
+
+# SuperUser for everyone 
+- username: user
+- password: user12345
