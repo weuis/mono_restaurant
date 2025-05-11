@@ -40,13 +40,10 @@ staticfiles/
 
 # Static/profile-image cache, but keep default images
 static/.DS_Store
-static/profile-image/.DS_Store
-!static/profile-image/default-dish.jpg
-!static/profile-image/default_profile.jpg
+static/media/profile-image/.DS_Store
+!static/media/profile-image/default-dish.jpg
+!static/profile_image/default_profile.jpg
 
-# Pictures
-media/
-static/profile-image/
 
 # IDE and editor folders
 .vscode/
@@ -73,7 +70,6 @@ yarn-error.log
 
 local_settings.py
 db.sqlite3-journal
-media
 
 # If your build process includes running collectstatic, then you probably don't need or want to include staticfiles/
 # in your Git repository. Update and uncomment the following line accordingly.

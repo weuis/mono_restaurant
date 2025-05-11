@@ -7,7 +7,7 @@
         {% if cook.profile_picture %}
             <img src="{{ cook.profile_picture.url }}" class="w-32 h-32 rounded-full object-cover mb-4 shadow" alt="{{ cook.username }}">
         {% else %}
-            <img src="{% static 'profile-image/default_profile.jpg' %}" class="w-32 h-32 rounded-full object-cover mb-4 shadow" alt="Default profile">
+            <img src="{% static 'profile_image/default_profile.jpg' %}" class="w-32 h-32 rounded-full object-cover mb-4 shadow" alt="Default profile">
         {% endif %}
 
         <h2 class="text-2xl font-bold">{{ cook.first_name }} {{ cook.last_name }}</h2>
