@@ -2,7 +2,7 @@
 
 **mono_restaurant** is a modular and scalable restaurant management system built with Python and Django. It offers comprehensive solutions for managing menus, orders, staff, and inventory, designed with clean architecture principles and best coding practices.
 
-🔗 **Try it now:** [mono-restaurant-1.onrender.com](https://mono-restaurant-1.onrender.com)
+🔗 **Try it now:** [mono-restaurant-1.onrender.com](https://mono-restaurant-app-web.onrender.com)
 ---
 ## 🚀 Features
 
