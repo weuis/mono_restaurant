@@ -40,9 +40,9 @@ staticfiles/
 
 # Static/profile-image cache, but keep default images
 static/.DS_Store
-static/profile-image/.DS_Store
-!static/profile-image/default-dish.jpg
-!static/profile-image/default_profile.jpg
+static/media/profile-image/.DS_Store
+!static/media/profile-image/default-dish.jpg
+!static/media/profile-image/default_profile.jpg
 
 
 # IDE and editor folders
