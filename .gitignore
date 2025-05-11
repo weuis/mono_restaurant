@@ -42,7 +42,7 @@ staticfiles/
 static/.DS_Store
 static/media/profile-image/.DS_Store
 !static/media/profile-image/default-dish.jpg
-!static/media/profile-image/default_profile.jpg
+!static/profile_image/default_profile.jpg
 
 
 # IDE and editor folders
